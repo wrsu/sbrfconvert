@@ -150,7 +150,14 @@ function sbrfconvert( $sbrf, $type = 'json', $utf8 = false ) {
 		$table[] = implode( $glue2, $heads );
 
 		// Fill the body with elements
-		foreach ( $data as &$d ) {			$table[] = implode( $glue2, $d );
+		foreach ( $data as &$d ) {
+
+		    // Russian Excel does not support . in floats
+		    $d['summ'] = strtr( (string) $d['summ'], '.', ',' );
+		    $d['total'] = strtr( (string) $d['total'], '.', ',' );
+			// Add the row
+			$table[] = implode( $glue2, $d );
+
 		} unset ( $d );
 
 		// Make the final result
