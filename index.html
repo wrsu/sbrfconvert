@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>Конвертер выписки по карте Сбербанка в нормальный формат</title>
+	<meta charset="utf-8" />
+	<meta name="Content-Type" content="text/html; charset=utf-8" />
+	<style type="text/css">
+		body { background: #eee; padding: 20px; margin: 0; font: normal 14px Open Sans, Segoe UI, Trebushet MS, Verdana, sans-serif; }
+		section { max-width: 800px; margin: 0 auto; padding: 40px; background: #fff; border: solid 1px #ddd; }
+		header { text-align: center; }
+		header h1 { margin: 0 0 10px 0; padding: 0; font-weight: normal; font-size: 1.8em; }
+		header p { margin: 0 0 10px 0; padding: 0; font-size: 1.2em; }
+		form { margin: 40px 0; }
+		label { display: block; margin: 5px 0; }
+		.control { margin: 5px 0; width: 98%; padding: 1%; border: solid 1px #bbb; background: #fff; font-size: 14px; }
+		.inline-checkbox { padding: 2px; font-size: 1em; line-height: 1em; }
+		.inline-checkbox input { vertical-align: middle; margin: 0 0 2px 0; }
+		select.control { width: 100%; padding: 1% 0; }
+		button { display: block; margin: 10px auto; padding: 10px 35px; font-size: 1em; }
+		article { margin: 40px 0; }
+		article h2 { margin: 10px 0; padding: 0; font-weight: normal; font-size: 1.5em; }
+		footer { text-align: center; font-size: 0.9em; color: #555; margin: 0; padding: 0; }
+		@media (max-width: 600px) {			body { padding: 0; background: #fff; font-size: 12px; }
+			section { padding: 25px; border: none; }
+		}
+	</style>
+</head>
+<body>
+
+<section>
+
+	<header>
+		<h1>Конвертер выписки по карте Сбербанка в нормальный формат</h1>
+		<p>Преобразуйте выписку Сбербанка в формат Microsoft Excel CSV/TSV или JSON</p>
+	</header>
+
+	<form action="convert.php" method="post" enctype="multipart/form-data">
+
+		<label for="report">Преобразовать txt-файл выписки ...</label>
+		<input type="file" name="report" id="report" class="control" />
+
+		<label for="type">... в формат</label>
+		<select name="type" class="control">
+			<option value="csv">Microsoft Excel CSV</option>
+			<option value="tsv">Microsoft Excel TSV</option>
+			<option value="json">JSON</option>
+		</select>
+
+		<label class="inline-checkbox"><input type="checkbox" name="utf8" value="1" /> Преобразовать кодировку в Unicode</label>
+
+		<button type="submit">Конвертировать файл</button>
+
+	</form>
+
+	<article>
+		<h2>Инструкция по применению</h2>
+		<ol>
+			<li>Закажите на свою почту выписку по интересующему Вас счёту через Сбербанк-Онлайн.</li>
+			<li>Скачайте полученный файл выписки в формате TXT.</li>
+			<li>Выберите данный файл для загрузки в эту форму и укажите необходимый формат.</li>
+			<li>Нажмите «Конвертировать файл» и наслаждайтесь результатом.</li>
+		</ol>
+		<h2>Запросы через API</h2>
+		<p>Вы можете осуществлять запросы к конвертеру через простую API-функцию. Запрос осуществляется методом POST.</p>
+		<ol>
+			<li><b>URL</b>: http://www.av13.ru/sbrf/convert.php</li>
+			<li><b>Параметры</b>:
+				<ul>
+					<li><b>data</b> - содержимое файла, который необходим конвертировать. Рекомендуется использовать кодировку Windows-1251 во избежание проблем с комментариями к платежам.</li>
+					<li><b>type</b> - формат возвращаемого результата: csv, tsv или json (по умолчанию)</li>
+					<li><b>utf8</b> - флаг конвертации в UTF-8, может принимать значения 0 или 1, по умолчанию 0.
+				</ul>
+			</li>
+			<li><b>Возвращаемый результат</b>: файл в выбранном формате</li>
+			<li><b>Возможные ошибки</b>: если не указан какой-либо параметр, функция скажет <em>oops!</em></li>
+		</ol>
+		<h2>Исходный код</h2>
+		<p>Конвертер распространяется по лицензии GPL v2, исходный код доступен на <a href="https://github.com/wrsu/sbrfconvert">GitHub</a>.</p>
+	</article>
+
+	<footer>
+		© 2016г. Антон Резниченко
+	</footer>
+
+</section>
+
+</body>
+</html>
